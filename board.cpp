@@ -1,5 +1,4 @@
 #include "board.hpp"
-#include "helpers.hpp"
 
 // initial setup: 2D array of numbers representing a sudoku board
 SudokuBoard::SudokuBoard(int initial_setup[9][9]) {
@@ -33,7 +32,7 @@ bool SudokuBoard::safeMove(int row, int col, int value) {
             return false;
         }      
     }
-    // checks if the number is already in the col
+    // checks if the number is already in the column
     for (int i = 0; i < 9; i++) {
         if (board[i][col] == value) {
             return false;
@@ -41,7 +40,7 @@ bool SudokuBoard::safeMove(int row, int col, int value) {
             
     }
 
-    // check if number is already in the particular 3*3 matrix
+    // check if number is already in its 3*3 matrix
     int startRow = row - row % 3;
     int startCol = col - col % 3;
 
@@ -52,6 +51,8 @@ bool SudokuBoard::safeMove(int row, int col, int value) {
             }
         }
     }
+
+    // if number does not exist yet in a proper space, assume it can work
     return true;
 }
 

@@ -7,7 +7,6 @@
 
 class SudokuBoard {
     private:
-        // the actual board containing the boxes and box data
         int board[9][9];
 
     public:
