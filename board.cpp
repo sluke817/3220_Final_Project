@@ -15,14 +15,21 @@ SudokuBoard::SudokuBoard(int initial_setup[9][9]) {
             }
         }
     }
-    updateDomains();
-    updateDegrees();
+
+    for(int row = 0; row < 9; row++) {
+        for(int col = 0; col < 9; col++) {
+            updateDomains(row, col);
+            updateDegrees(row, col);
+        }
+    }
+    
 }
 
-void SudokuBoard::updateDomains() {
+void SudokuBoard::updateDomains(int row, int col) {
+    
+}  
 
-}
 
-void SudokuBoard::updateDegrees() {
+void SudokuBoard::updateDegrees(int row, int col) {
 
 }

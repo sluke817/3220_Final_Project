@@ -22,8 +22,8 @@ class SudokuBoard {
 
     public:
         SudokuBoard(int initial_board[9][9]); 
-        void updateDomains();
-        void updateDegrees();
+        void updateDomains(int row, int col);
+        void updateDegrees(int row, int col);
 };
 
 #endif
