@@ -9,6 +9,7 @@ SudokuBoard::SudokuBoard(int initial_setup[9][9]) {
     }
 }
 
+// prints the board
 void SudokuBoard::printBoard() {
     for(int i = 0; i < 9; i++) {
         for(int j = 0; j < 9; j++) {
@@ -80,12 +81,12 @@ bool SudokuBoard::backtrackingSolve(int row, int col) {
         if (safeMove(row, col, value)) 
         {
               
-           /* Assigning the num in 
+           /* Assigning a safe move value in 
               the current (row,col)
               position of the grid
               and assuming our assigned 
               num in the position
-              is correct     */
+              is correct (for now)    */
             board[row][col] = value;
             
             //  Checking the next possibility with next column
@@ -94,8 +95,7 @@ bool SudokuBoard::backtrackingSolve(int row, int col) {
             }
                 
         }
-        // Removes the guessed value since our assumption was wrong,
-        // so we go for the next assumption with a diff num value
+        // Removes the guessed value since our assumption was wrong
         board[row][col] = 0;
     }
     return false;

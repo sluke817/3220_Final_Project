@@ -11,14 +11,12 @@ SudokuBoard BoardFactory::createBoard(boardDifficulty difficulty) {
                                     {6, 9, 2, 3, 5, 1, 8, 7, 4}, 
                                     {7, 4, 5, 2, 8, 6, 3, 1, 9}};
 
-    int newLayout[9][9] = {0};
-
     for(int i = 0; i < (int)difficulty; i++) {
         int randomRow = rand() % 10;
         int randomCol = rand() % 10;
 
-        newLayout[randomRow][randomCol] = initialValidLayout[randomRow][randomCol];
+        initialValidLayout[randomRow][randomCol] = 0;
     }
 
-    return SudokuBoard(newLayout);
+    return SudokuBoard(initialValidLayout);
 }
