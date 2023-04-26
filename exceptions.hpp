@@ -1,5 +1,5 @@
-#ifndef EXCP.HPP
-#define EXCP.HPP
+#ifndef EXCP_HPP
+#define EXCP_HPP
 #include <string>
 
 class InvalidBoxInput : public std::exception {
@@ -9,9 +9,14 @@ class InvalidBoxInput : public std::exception {
         InvalidBoxInput(std::string msg) {
             message = msg;
         }
-        char * what () {
-            return const_cast<char*>(message.c_str());;
+        
+        const char* what() const noexcept {
+            return const_cast<char*>(message.c_str());
         }
+
+        // const char * what () const{
+        //     return const_cast<char*>(message.c_str());
+        // }
 };
 
 #endif

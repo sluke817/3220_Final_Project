@@ -1,6 +1,6 @@
 #include "helpers.hpp"
 
-int calcGridNum(int rowNum, int colNum) {
+int Helper::calcGridNum(int rowNum, int colNum) {
     if(rowNum < 3) {
         if(colNum < 3) {
             return 0;

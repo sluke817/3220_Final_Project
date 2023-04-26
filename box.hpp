@@ -1,10 +1,11 @@
 // Individual boxes on a soduko board
 // Contains a value, a grid location coordinates, and a domain of possible values for itself
-#ifndef BOX.HPP
-#define BOX.HPP
+#ifndef BOX_HPP
+#define BOX_HPP
 #include <vector>
 #include <string>
 #include "exceptions.hpp"
+#include "helpers.hpp"
 
 class Box {
     private:

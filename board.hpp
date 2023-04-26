@@ -1,8 +1,8 @@
 // The overal sudoko board
 // 9x9
 // Each square is represented as a box object from box.hpp
-#ifndef BOARD.HPP
-#define BOARD.HPP
+#ifndef BOARD_HPP
+#define BOARD_HPP
 #include <iostream>
 
 class SudokuBoard {

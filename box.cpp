@@ -1,5 +1,4 @@
 #include "box.hpp"
-#include "helpers.hpp"
 
 Box::Box() {
     
@@ -30,7 +29,7 @@ Box::Box(int _value, int _rowNum, int _colNum) {
         domain = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     }
 
-    gridNum = calcGridNum(_rowNum, _colNum);
+    gridNum = Helper::calcGridNum(_rowNum, _colNum);
 }
 
 std::vector<int> Box::getRemainingValues() const {

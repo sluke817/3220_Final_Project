@@ -1,3 +1,5 @@
+#ifndef BOARDFACTORY_HPP
+#define BOARDFACTORY_HPP
 #include "board.hpp"
 #include <cstdlib>
 
@@ -16,3 +18,5 @@ class BoardFactory {
         // returns a board from either a file or from user input (strategy design pattern)
         
 };
+
+#endif
