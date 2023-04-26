@@ -2,6 +2,8 @@
 #define BOARDFACTORY_HPP
 #include "board.hpp"
 #include <cstdlib>
+#include <algorithm>
+
 
 enum boardDifficulty {
     easy = 10,
@@ -16,7 +18,8 @@ class BoardFactory {
 
         // *** ADD *** 
         // returns a board from either a file or from user input (strategy design pattern)
-        
+        static SudokuBoard solveBoardFromFile(std::string fileName);
+        static SudokuBoard solveBoardFromInput();
 };
 
 #endif
