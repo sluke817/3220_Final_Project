@@ -3,7 +3,9 @@
 #include "board.hpp"
 #include <cstdlib>
 #include <algorithm>
-
+#include <iostream>
+#include <cstddef>
+#include <fstream>
 
 enum boardDifficulty {
     easy = 10,

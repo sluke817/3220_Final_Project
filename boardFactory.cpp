@@ -22,18 +22,18 @@ SudokuBoard BoardFactory::createBoard(boardDifficulty difficulty) {
 }
 
 template <typename T, size_t K>
-std::istream& operator>>(std::istream& is, T(&arr)[K])
+std::istream& operator>>(std::istream& is, T(&board)[K])
 {
     for (size_t i = 0; i < K; ++i) {
-        is >> arr[i];
+        is >> board[i];
     }
     return is;
 }
 
-
 SudokuBoard BoardFactory::solveBoardFromInput(){
 
     std::cout << "You will enter the puzzle row by row. Enter a 0 for values that are empty" << std::endl;
+    std::cout << "An example entry looks like this : 1 2 3 4 5 6 7 8 9" << std::endl;
 
     int row[N];
     int board[N][N];
@@ -51,4 +51,25 @@ SudokuBoard BoardFactory::solveBoardFromInput(){
 
     return sb;
 }
+
+SudokuBoard BoardFactory::solveBoardFromFile(std::string fileName){
+    int board[9][9];
+    std::ifstream infile(fileName);
+
+    if (!infile) {
+        std::cerr << "Unable to open file";
+        exit(1);
+    }
+
+    for (int i = 0; i < 9; ++i) {
+        for (int j = 0; j < 9; ++j) {
+            infile >> board[i][j];
+        }
+    }
+    SudokuBoard sb = SudokuBoard(board);
+    sb.solveBoard();
+
+    return sb;
+}
+
 
