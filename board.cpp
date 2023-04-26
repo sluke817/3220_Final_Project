@@ -1,9 +1,9 @@
 #include "board.hpp"
 
 // initial setup: 2D array of numbers representing a sudoku board
-SudokuBoard::SudokuBoard(int initial_setup[9][9]) {
-    for(int row = 0; row < 9; row++) {
-        for(int col = 0; col < 9; col++) {
+SudokuBoard::SudokuBoard(int initial_setup[N][N]) {
+    for(int row = 0; row < N; row++) {
+        for(int col = 0; col < N; col++) {
             board[row][col] = initial_setup[row][col];
         }
     }
@@ -11,8 +11,8 @@ SudokuBoard::SudokuBoard(int initial_setup[9][9]) {
 
 // prints the board
 void SudokuBoard::printBoard() {
-    for(int i = 0; i < 9; i++) {
-        for(int j = 0; j < 9; j++) {
+    for(int i = 0; i < N; i++) {
+        for(int j = 0; j < N; j++) {
             std::cout << board[i][j] << " ";
         }
         std::cout << std::endl;
@@ -20,21 +20,21 @@ void SudokuBoard::printBoard() {
 }
 
 bool SudokuBoard::safeMove(int row, int col, int value) {
-    if(value < 1 || value > 9) {
+    if(value < 1 || value > N) {
         throw "Invalid value.";
     }
-    if(row < 0 || row > 9 || col < 0 || col > 9) {
+    if(row < 0 || row > N || col < 0 || col > N) {
         throw "Invalid coordinantes.";
     }
 
     // checks if number is already in the row
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < N; i++) {
         if (board[row][i] == value) {
             return false;
         }      
     }
     // checks if the number is already in the column
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < N; i++) {
         if (board[i][col] == value) {
             return false;
         }  
@@ -61,11 +61,11 @@ bool SudokuBoard::safeMove(int row, int col, int value) {
 bool SudokuBoard::backtrackingSolve(int row, int col) {
 
     // we have reached the very end with no errors, so it is solved!
-    if (row == 8 && col == 9)
+    if (row == 8 && col == N)
         return true;
 
     // if we are on the last column, we move to the next row
-    if (col == 9) {
+    if (col == N) {
         row++;
         col = 0;
     }
@@ -74,7 +74,7 @@ bool SudokuBoard::backtrackingSolve(int row, int col) {
     if (board[row][col] > 0)
         return backtrackingSolve(row, col + 1);
 
-    for (int value = 1; value <= 9; value++) 
+    for (int value = 1; value <= N; value++) 
     {
         // Check if it is safe to place the num (1-9) in the given row and col
         // we then move to next column
@@ -92,7 +92,7 @@ bool SudokuBoard::backtrackingSolve(int row, int col) {
             //  Checking the next possibility with next column
             if (backtrackingSolve(row, col + 1)) {
                 return true;
-            }
+            }       
                 
         }
         // Removes the guessed value since our assumption was wrong
