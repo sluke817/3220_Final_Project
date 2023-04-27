@@ -23,22 +23,32 @@ int main(){
     // board1.solveBoard();
 
     
+    // input decision
+    std::ifstream boardInFile;
+    boardInFile.open("board1.txt");
+    UserHandler::getHandler()->setInput(boardInFile);
+    // or...
+    //std::cout << "Enter the board row by row, making sure to put a space between each number" << std::endl;
 
-    // std::ifstream matrixFile;
-    // matrixFile.open("board1.txt");
-    // UserHandler::getHandler()->setInput(matrixFile);
+
+    // output decision
+    std::ofstream boardOutFile;
+    boardOutFile.open("boardOut.txt");
+    UserHandler::getHandler()->setOutput(boardOutFile);
+    // or...
+    // do nothing -> the default output is the screen
 
 
-    std::cout << "Enter the board row by row, making sure to put a space between each number" << std::endl;
+
+    
     try {
         SudokuBoard sb = UserHandler::getHandler()->inputBoard();
-        sb.printBoard();
+        sb.solveBoard();
+        UserHandler::getHandler()->outputBoard(sb);
     }
     catch(const char* msg) {
         std::cout << msg << std::endl;
     }
-    
-
 
 
     return 0;

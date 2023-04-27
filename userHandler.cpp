@@ -22,7 +22,7 @@ void UserHandler::setOutput(std::ostream& newOut) {
 }
 
 // outputs a sudoku board to the output
-void UserHandler::outputBoard(SudokuBoard board) {
+void UserHandler::outputBoard(SudokuBoard& board) {
     try {
         *outputStream << board.toString();
     }
@@ -60,7 +60,7 @@ SudokuBoard UserHandler::inputBoard() {
             }
 
             for(int j = 0; j < N; j++){
-                if(row[j] > 9 || row[j] < 1) {
+                if(row[j] > 9 || row[j] < 0) {
                     throw "Error: Invalid values in board.";
                 }
                 board[i * N + j] = row[j];

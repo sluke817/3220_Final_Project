@@ -120,12 +120,8 @@ bool SudokuBoard::backtrackingSolve(int row, int col) {
 }
 
 void SudokuBoard::solveBoard() {
-    std::cout << "Initial Board: " << std::endl;
-    printBoard();
-
     if(backtrackingSolve(0,0)) {
-        std::cout << "Solved board: " << std::endl;
-        printBoard();
+        std::cout << "Solved board! " << std::endl;
     }
     else {
         std::cout << "No solution found. Unsolvable!" << std::endl;

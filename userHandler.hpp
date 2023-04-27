@@ -23,7 +23,7 @@ class UserHandler {
         SudokuBoard inputBoard();
 
         void setOutput(std::ostream&); // Strategy design pattern
-        void outputBoard(SudokuBoard);
+        void outputBoard(SudokuBoard&);
 };
 
 
