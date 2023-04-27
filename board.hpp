@@ -16,6 +16,7 @@ class SudokuBoard {
 
     public:
         SudokuBoard(int initial_board[N][N]); 
+        int getVal(int, int);
         void printBoard();
         bool safeMove(int row, int col, int value);
         bool backtrackingSolve(int row, int col);

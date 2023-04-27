@@ -1,5 +1,5 @@
-#ifndef HANDLER.HPP
-#define HANDLER.HPP
+#ifndef HANDLER_HPP
+#define HANDLER_HPP
 
 #include <string>
 #include <iostream>

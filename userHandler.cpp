@@ -76,12 +76,12 @@ int UserHandler::getMenuChoice(int numChoices, std::string msg) {
 
             for(int i = 0; i <= numChoices; i++) {
                 if(choice == i) {
-                    validChoice == true;
+                    validChoice = true;
                 }
             }
         }
         catch(std::exception ex) {
-            validChoice == false;
+            validChoice = false;
         }
 
         if(validChoice) {

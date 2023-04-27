@@ -20,6 +20,10 @@ void SudokuBoard::printBoard() {
     }
 }
 
+int SudokuBoard::getVal(int row, int col) {
+    return board[row][col];
+}
+
 // returns the board in string format
 std::string SudokuBoard::toString() {
     std::stringstream ss;
