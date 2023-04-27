@@ -1,27 +1,27 @@
 #include "board.hpp"
 
 // initial setup: 2D array of numbers representing a sudoku board
-SudokuBoard::SudokuBoard(int setup[N][N]) {
+SudokuBoard::SudokuBoard(int setup[N * N]) {
+    board = std::make_unique<int[]>(N * N);
     for(int row = 0; row < N; row++) {
         for(int col = 0; col < N; col++) {
-            board[row].reset(new int[N]);
-            board[row][col] = setup[row][col];
+            board[row * N + col] = setup[row * N + col];
         }
     }
 }
 
-// prints the board
+// prints the board to std::cout
 void SudokuBoard::printBoard() {
     for(int i = 0; i < N; i++) {
         for(int j = 0; j < N; j++) {
-            std::cout << board[i][j] << " ";
+            std::cout << board[i * N + j] << " ";
         }
         std::cout << std::endl;
     }
 }
 
 int SudokuBoard::getVal(int row, int col) {
-    return board[row][col];
+    return board[row * N + col];
 }
 
 // returns the board in string format
@@ -29,7 +29,7 @@ std::string SudokuBoard::toString() {
     std::stringstream ss;
     for(int i = 0; i < N; i++) {
         for(int j = 0; j < N; j++) {
-            ss << board[i][j] << " ";
+            ss << board[i * N + j] << " ";
         }
         ss << "\n";
     }
@@ -46,13 +46,13 @@ bool SudokuBoard::safeMove(int row, int col, int value) {
 
     // checks if number is already in the row
     for (int i = 0; i < N; i++) {
-        if (board[row][i] == value) {
+        if (board[row * N + i] == value) {
             return false;
         }      
     }
     // checks if the number is already in the column
     for (int i = 0; i < N; i++) {
-        if (board[i][col] == value) {
+        if (board[i * N + col] == value) {
             return false;
         }  
             
@@ -64,7 +64,7 @@ bool SudokuBoard::safeMove(int row, int col, int value) {
 
     for(int i = 0; i < 3; i++) {
         for(int j = 0; j < 3; j++) {
-            if (board[i + startRow][j + startCol] == value) {
+            if (board[(i + startRow) * N + j + startCol] == value) {
                 return false;
             }
         }
@@ -88,7 +88,7 @@ bool SudokuBoard::backtrackingSolve(int row, int col) {
     }
 
     // if there is already a number here, move to the next space
-    if (board[row][col] > 0)
+    if (board[row * N + col] > 0)
         return backtrackingSolve(row, col + 1);
 
     for (int value = 1; value <= N; value++) 
@@ -104,7 +104,7 @@ bool SudokuBoard::backtrackingSolve(int row, int col) {
               and assuming our assigned 
               num in the position
               is correct (for now)    */
-            board[row][col] = value;
+            board[row * N + col] = value;
             
             //  Checking the next possibility with next column
             if (backtrackingSolve(row, col + 1)) {
@@ -113,7 +113,7 @@ bool SudokuBoard::backtrackingSolve(int row, int col) {
                 
         }
         // Removes the guessed value since our assumption was wrong
-        board[row][col] = 0;
+        board[row * N + col] = 0;
     }
     return false;
     

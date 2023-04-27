@@ -48,13 +48,27 @@ void UserHandler::setInput(std::istream& newIn) {
 
 SudokuBoard UserHandler::inputBoard() {
     int row[N];
-    int board[N][N];
+    int board[N * N];
 
-    for(int i = 0; i < N; i++){
-        std::cin >> row;
-        for(int j = 0; j < N; j++){
-            board[i][j] = row[j];
+    try {
+        for(int i = 0; i < N; i++){
+
+            *inputStream >> row;
+
+            if(inputStream->fail()) { // checks for valid numerical input
+                throw "Error: Invalid input format.";
+            }
+
+            for(int j = 0; j < N; j++){
+                if(row[j] > 9 || row[j] < 1) {
+                    throw "Error: Invalid values in board.";
+                }
+                board[i * N + j] = row[j];
+            }
         }
+    }
+    catch(std::exception) {
+        throw "Error when reading input. Please make sure format is correct.";
     }
 
     return BoardFactory::createBoard(board);

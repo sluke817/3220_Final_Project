@@ -18,12 +18,14 @@ class BoardFactory {
     public:
         // returns a randomly generated board of different difficulty
         static SudokuBoard createBoard(boardDifficulty difficulty);
-        static SudokuBoard createBoard(int arr[N][N]);
+
+        // returns a Sudoku board from an array
+        static SudokuBoard createBoard(int arr[N * N]);
 
         // *** ADD *** 
         // returns a board from either a file or from user input (strategy design pattern)
-        static SudokuBoard solveBoardFromFile(std::string fileName);
-        static SudokuBoard solveBoardFromInput();
+        // static SudokuBoard solveBoardFromFile(std::string fileName);
+        // static SudokuBoard solveBoardFromInput();
 };
 
 #endif

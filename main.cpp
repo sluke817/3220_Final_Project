@@ -22,9 +22,22 @@ int main(){
 
     // board1.solveBoard();
 
+    
+
+    // std::ifstream matrixFile;
+    // matrixFile.open("board1.txt");
+    // UserHandler::getHandler()->setInput(matrixFile);
+
+
     std::cout << "Enter the board row by row, making sure to put a space between each number" << std::endl;
-    SudokuBoard sb = UserHandler::getHandler()->inputBoard();
-    sb.printBoard();
+    try {
+        SudokuBoard sb = UserHandler::getHandler()->inputBoard();
+        sb.printBoard();
+    }
+    catch(const char* msg) {
+        std::cout << msg << std::endl;
+    }
+    
 
 
 

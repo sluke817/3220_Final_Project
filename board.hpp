@@ -12,10 +12,10 @@
 
 class SudokuBoard {
     private:
-        std::unique_ptr<std::unique_ptr<int[]>[]> board;
+        std::unique_ptr<int[]> board;
 
     public:
-        SudokuBoard(int initial_board[N][N]); 
+        SudokuBoard(int initial_board[N * N]); 
         int getVal(int, int);
         void printBoard();
         bool safeMove(int row, int col, int value);
