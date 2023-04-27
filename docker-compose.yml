@@ -5,4 +5,4 @@ services:
     container_name: final_project
     volumes:
       - .:/final
-    command: make run
+    command: /bin/bash

@@ -1,8 +1,8 @@
-CXXFLAGS := -std=c++14 -Wall -Werror -pthread
+CXXFLAGS := -std=c++14 -Wall -Werror -ggdb -O0
 DANGEROUSFLAGS := -O3
 
 ALL_SOURCES := $(wildcard *.cpp)
-MAIN_SOURCES := $(filter-out TESTSs.cpp, $(ALL_SOURCES))
+MAIN_SOURCES := $(filter-out tests.cpp, $(ALL_SOURCES))
 TESTS_SOURCES := $(filter-out main.cpp, $(ALL_SOURCES))
 
 MAIN_OBJS := $(MAIN_SOURCES:%.cpp=%.o)
@@ -15,7 +15,7 @@ LDLIBS := -lgtest -lgtest_main
 MAIN := finalProject.out
 TESTS := runTests.out
 
-.PHONY : all
+.PHONY : all clean run test
 all : $(MAIN) $(TESTS)
 
 $(MAIN) : $(MAIN_OBJS)
@@ -24,15 +24,11 @@ $(MAIN) : $(MAIN_OBJS)
 $(TESTS): $(TESTS_OBJS)
 	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
-
-.PHONY : clean
 clean : 
 	rm -rf $(MAIN) $(TESTS) $(MAIN_OBJS) $(TESTS_OBJS)
 
-.PHONY : run
 run :
 	./$(MAIN)
 
-.PHONY : TESTS
-TESTS : 
+test : 
 	./$(TESTS)

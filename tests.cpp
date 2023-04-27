@@ -1,15 +1,15 @@
-#ifndef TESTS
-#define TESTS
+#ifndef TESTS_CPP
+#define TESTS_CPP
 #include "board.hpp"
 #include "boardFactory.hpp"
 #include "userHandler.hpp"
-#include "gtest/gtest.h"make
+#include "gtest/gtest.h"
 
 class BoardTest : public ::testing::Test {
-    protected: 
+    protected:
         void SetUp() override {
             board1 = new SudokuBoard(initialValidLayout);
-        };
+        }
         SudokuBoard* board1;
         int initialValidLayout[9][9] =  {{0,0,1,0,0,2,0,0,0},
                                             {0,0,5,0,0,6,0,3,0},
@@ -20,7 +20,6 @@ class BoardTest : public ::testing::Test {
                                             {8,0,0,0,4,9,0,5,0},
                                             {1,0,0,3,2,0,0,0,0},
                                             {0,0,9,0,0,0,3,0,0}};
-
 };
 
 TEST_F(BoardTest, TestInitializeBoard) {
