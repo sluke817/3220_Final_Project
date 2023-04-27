@@ -19,6 +19,18 @@ void SudokuBoard::printBoard() {
     }
 }
 
+// returns the board in string format
+std::string SudokuBoard::toString() {
+    std::stringstream ss;
+    for(int i = 0; i < N; i++) {
+        for(int j = 0; j < N; j++) {
+            ss << board[i][j] << " ";
+        }
+        ss << "\n";
+    }
+    return ss.str();
+}
+
 bool SudokuBoard::safeMove(int row, int col, int value) {
     if(value < 1 || value > N) {
         throw "Invalid value.";
