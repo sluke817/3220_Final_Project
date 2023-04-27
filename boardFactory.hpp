@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <fstream>
 
+
 enum boardDifficulty {
     easy = 10,
     medum = 7,
@@ -17,6 +18,7 @@ class BoardFactory {
     public:
         // returns a randomly generated board of different difficulty
         static SudokuBoard createBoard(boardDifficulty difficulty);
+        static SudokuBoard createBoard(int arr[N][N]);
 
         // *** ADD *** 
         // returns a board from either a file or from user input (strategy design pattern)

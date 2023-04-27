@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include "boardFactory.hpp"
 #include "board.hpp"
 
 // Overall class uses the Singleton design pattern 
@@ -12,12 +13,20 @@ class UserHandler {
     private:
         static UserHandler* instance; // Singleton design pattern
         std::ostream* outputStream;
-        UserHandler(std::ostream& out);
+        std::istream* inputStream;
+        UserHandler(std::istream&, std::ostream&);
     public:
         static UserHandler* getHandler();
         int getMenuChoice(int, std::string);
-        void setOutput(std::ostream& newOutputLoc); // Strategy design pattern
+
+        void setInput(std::istream&);
+        SudokuBoard inputBoard();
+
+        void setOutput(std::ostream&); // Strategy design pattern
         void outputBoard(SudokuBoard);
+
+        SudokuBoard getBoardFromInput();
+        SudokuBoard getBoardFromFile();
 };
 
 

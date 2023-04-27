@@ -1,10 +1,11 @@
 #include "board.hpp"
 
 // initial setup: 2D array of numbers representing a sudoku board
-SudokuBoard::SudokuBoard(int initial_setup[N][N]) {
+SudokuBoard::SudokuBoard(int setup[N][N]) {
     for(int row = 0; row < N; row++) {
         for(int col = 0; col < N; col++) {
-            board[row][col] = initial_setup[row][col];
+            board[row].reset(new int[N]);
+            board[row][col] = setup[row][col];
         }
     }
 }

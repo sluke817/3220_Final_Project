@@ -6,12 +6,13 @@
 
 #include <iostream>
 #include <sstream>
+#include <memory>
 
 #define N 9
 
 class SudokuBoard {
     private:
-        int board[N][N];
+        std::unique_ptr<std::unique_ptr<int[]>[]> board;
 
     public:
         SudokuBoard(int initial_board[N][N]); 

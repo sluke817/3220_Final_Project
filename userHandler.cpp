@@ -1,24 +1,27 @@
 #include "userHandler.hpp"
 
-UserHandler* UserHandler::instance = nullptr;
+UserHandler* UserHandler::instance = nullptr; // for Singleton implementation
 
-UserHandler::UserHandler(std::ostream& out) {
+UserHandler::UserHandler(std::istream& in, std::ostream& out) {
     outputStream = &out;
+    inputStream = &in;
 }
 
 // default is cout, to change make sure to set the output after getting the handler
 UserHandler* UserHandler::getHandler() {
     if(!instance) {
-        instance = new UserHandler(std::cout);
+        instance = new UserHandler(std::cin, std::cout);
     }
     return instance;
 }
 
+
 // sets the output
-void UserHandler::setOutput(std::ostream& newOutputLoc) {
-    outputStream = &newOutputLoc;
+void UserHandler::setOutput(std::ostream& newOut) {
+    outputStream = &newOut;
 }
 
+// outputs a sudoku board to the output
 void UserHandler::outputBoard(SudokuBoard board) {
     try {
         *outputStream << board.toString();
@@ -28,6 +31,34 @@ void UserHandler::outputBoard(SudokuBoard board) {
     }
 }
 
+
+
+template <typename T, size_t K>
+std::istream& operator>>(std::istream& is, T(&board)[K])
+{
+    for (size_t i = 0; i < K; ++i) {
+        is >> board[i];
+    }
+    return is;
+}
+
+void UserHandler::setInput(std::istream& newIn) {
+    inputStream = &newIn;
+}
+
+SudokuBoard UserHandler::inputBoard() {
+    int row[N];
+    int board[N][N];
+
+    for(int i = 0; i < N; i++){
+        std::cin >> row;
+        for(int j = 0; j < N; j++){
+            board[i][j] = row[j];
+        }
+    }
+
+    return BoardFactory::createBoard(board);
+}
 
 
 // returns a choice from a menu selection. Does not let the user leave until entering a valid choice

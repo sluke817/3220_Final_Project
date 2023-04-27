@@ -21,6 +21,10 @@ SudokuBoard BoardFactory::createBoard(boardDifficulty difficulty) {
     return SudokuBoard(initialValidLayout);
 }
 
+SudokuBoard BoardFactory::createBoard(int arr[N][N]) {
+    return SudokuBoard(arr);
+}
+
 template <typename T, size_t K>
 std::istream& operator>>(std::istream& is, T(&board)[K])
 {
