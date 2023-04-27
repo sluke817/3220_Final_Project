@@ -7,7 +7,7 @@ UserHandler::UserHandler(std::istream& in, std::ostream& out) {
     inputStream = &in;
 }
 
-// default is cout, to change make sure to set the output after getting the handler
+// default is cout, to change make sure to set the output after getting the handler if different is desired
 UserHandler* UserHandler::getHandler() {
     if(!instance) {
         instance = new UserHandler(std::cin, std::cout);
@@ -31,8 +31,7 @@ void UserHandler::outputBoard(SudokuBoard& board) {
     }
 }
 
-
-
+// cool template for overiding the >> operator to handle the reading of the board to any input stream (thanks olivia)
 template <typename T, size_t K>
 std::istream& operator>>(std::istream& is, T(&board)[K])
 {
@@ -42,10 +41,12 @@ std::istream& operator>>(std::istream& is, T(&board)[K])
     return is;
 }
 
+// sets the input (can use either cin or a ifstream (file))
 void UserHandler::setInput(std::istream& newIn) {
     inputStream = &newIn;
 }
 
+// returns a created sudoku board from the UserHandler's input
 SudokuBoard UserHandler::inputBoard() {
     int row[N];
     int board[N * N];
@@ -75,7 +76,7 @@ SudokuBoard UserHandler::inputBoard() {
 }
 
 
-// returns a choice from a menu selection. Does not let the user leave until entering a valid choice
+// returns a choice from a menu selection. Does not let the user leave until entering a valid choice (helps with user menu creation)
 int UserHandler::getMenuChoice(int numChoices, std::string msg) {
 
     std::cout << msg << " ";
@@ -87,6 +88,10 @@ int UserHandler::getMenuChoice(int numChoices, std::string msg) {
         try {
             std::cin >> choice;
             std::cout << std::endl;
+
+            if(std::cin.fail()) {
+                throw std::exception();
+            }
 
             for(int i = 0; i <= numChoices; i++) {
                 if(choice == i) {

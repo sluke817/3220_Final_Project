@@ -1,5 +1,6 @@
 #include "boardFactory.hpp"
 
+// need to build out still (*** UNFINISHED ***)
 SudokuBoard BoardFactory::createBoard(boardDifficulty difficulty) {
     int initialValidLayout[N * N] = {3, 1, 6, 5, 7, 8, 4, 9, 2, 
                                     5, 2, 9, 1, 3, 4, 7, 6, 8, 

@@ -1,6 +1,6 @@
 #include "board.hpp"
 
-// initial setup: 2D array of numbers representing a sudoku board
+// initial setup: 1D array of numbers representing a sudoku board ([row * N + col] = [row][col])
 SudokuBoard::SudokuBoard(int setup[N * N]) {
     board = std::make_unique<int[]>(N * N);
     for(int row = 0; row < N; row++) {
@@ -11,14 +11,14 @@ SudokuBoard::SudokuBoard(int setup[N * N]) {
 }
 
 // prints the board to std::cout
-void SudokuBoard::printBoard() {
-    for(int i = 0; i < N; i++) {
-        for(int j = 0; j < N; j++) {
-            std::cout << board[i * N + j] << " ";
-        }
-        std::cout << std::endl;
-    }
-}
+// void SudokuBoard::printBoard() {
+//     for(int i = 0; i < N; i++) {
+//         for(int j = 0; j < N; j++) {
+//             std::cout << board[i * N + j] << " ";
+//         }
+//         std::cout << std::endl;
+//     }
+// }
 
 int SudokuBoard::getVal(int row, int col) {
     return board[row * N + col];
@@ -36,6 +36,7 @@ std::string SudokuBoard::toString() {
     return ss.str();
 }
 
+// determines if a certain move is "safe"
 bool SudokuBoard::safeMove(int row, int col, int value) {
     if(value < 1 || value > N) {
         throw "Invalid value.";
@@ -124,6 +125,6 @@ void SudokuBoard::solveBoard() {
         std::cout << "Solved board! " << std::endl;
     }
     else {
-        std::cout << "No solution found. Unsolvable!" << std::endl;
+        std::cout << "No solution found. Board is unsolvable." << std::endl;
     }
 }

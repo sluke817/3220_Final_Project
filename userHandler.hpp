@@ -11,18 +11,27 @@
 // Output uses the strategy design pattern
 class UserHandler {
     private:
-        static UserHandler* instance; // Singleton design pattern
+        // Singleton
+        static UserHandler* instance;
+        UserHandler(std::istream&, std::ostream&);
+
+        // Strategy
         std::ostream* outputStream;
         std::istream* inputStream;
-        UserHandler(std::istream&, std::ostream&);
     public:
+
+        // Singleton Design Pattern
         static UserHandler* getHandler();
+
+
         int getMenuChoice(int, std::string);
 
+        // Strategy Design Pattern
         void setInput(std::istream&);
         SudokuBoard inputBoard();
 
-        void setOutput(std::ostream&); // Strategy design pattern
+        // Strategy Design Pattern
+        void setOutput(std::ostream&); 
         void outputBoard(SudokuBoard&);
 };
 

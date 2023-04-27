@@ -10,14 +10,15 @@
 
 #define N 9
 
+
 class SudokuBoard {
     private:
+        // [row * N + col] = [row][col]
         std::unique_ptr<int[]> board;
-
     public:
         SudokuBoard(int initial_board[N * N]); 
         int getVal(int, int);
-        void printBoard();
+        // void printBoard();
         bool safeMove(int row, int col, int value);
         bool backtrackingSolve(int row, int col);
         void solveBoard();
