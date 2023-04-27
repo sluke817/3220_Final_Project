@@ -24,9 +24,6 @@ class UserHandler {
 
         void setOutput(std::ostream&); // Strategy design pattern
         void outputBoard(SudokuBoard);
-
-        SudokuBoard getBoardFromInput();
-        SudokuBoard getBoardFromFile();
 };
 
 

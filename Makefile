@@ -2,33 +2,33 @@ CXXFLAGS := -std=c++14 -Wall -Werror -ggdb -O0
 DANGEROUSFLAGS := -O3
 
 ALL_SOURCES := $(wildcard *.cpp)
-MAIN_SOURCES := $(filter-out tests.cpp, $(ALL_SOURCES))
+TARGET_SOURCES := $(filter-out tests.cpp, $(ALL_SOURCES))
 TESTS_SOURCES := $(filter-out main.cpp, $(ALL_SOURCES))
 
-MAIN_OBJS := $(MAIN_SOURCES:%.cpp=%.o)
+TARGET_OBJS := $(TARGET_SOURCES:%.cpp=%.o)
 TESTS_OBJ := $(TESTS_SOURCES:%.cpp=%.o)
 
 # Linking
 LDFLAGS := -L/usr/local/lib
 LDLIBS := -lgtest -lgtest_main
 
-MAIN := finalProject.out
+TARGET := finalProject.out
 TESTS := runTests.out
 
 .PHONY : all clean run test
-all : $(MAIN) $(TESTS)
+all : $(TARGET) $(TESTS)
 
-$(MAIN) : $(MAIN_OBJS)
+$(TARGET) : $(TARGET_OBJS)
 	 $(CXX) $(CXXFLAGS) $(DANGEROUSFLAGS) $^ -o $@
 
 $(TESTS): $(TESTS_OBJS)
 	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 clean : 
-	rm -rf $(MAIN) $(TESTS) $(MAIN_OBJS) $(TESTS_OBJS)
+	rm -rf $(TARGET) $(TESTS) $(TARGET_OBJS) $(TESTS_OBJS)
 
 run :
-	./$(MAIN)
+	./$(TARGET)
 
 test : 
 	./$(TESTS)

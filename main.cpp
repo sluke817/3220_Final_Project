@@ -1,4 +1,9 @@
+#ifndef MAIN_CPP
+#define MAIN_CPP
 #include "board.hpp"
+#include "boardFactory.hpp"
+#include "userHandler.hpp"
+
 
 int main(){
 
@@ -17,8 +22,13 @@ int main(){
 
     // board1.solveBoard();
 
-    std::cout << "Hello!" << std::endl;
+    std::cout << "Enter the board row by row, making sure to put a space between each number" << std::endl;
+    SudokuBoard sb = UserHandler::getHandler()->inputBoard();
+    sb.printBoard();
 
-    
+
+
     return 0;
 }
+
+#endif
