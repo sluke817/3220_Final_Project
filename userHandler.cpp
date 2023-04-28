@@ -80,37 +80,36 @@ SudokuBoard UserHandler::inputBoard() {
 int UserHandler::getMenuChoice(int numChoices, std::string msg) {
 
     std::cout << msg << " ";
+    int choice = 0;
+    bool validChoice = false;
 
-    while(true) {
-        int choice = 0;
-        bool validChoice = false;
-
-        try {
+    while (!validChoice) {
+        try{
+            std::cout << ">> ";
             std::cin >> choice;
-            std::cout << std::endl;
 
-            if(std::cin.fail()) {
-                throw std::exception();
+            if (std::cin.fail()) {
+                throw std::runtime_error("Invalid input. Please try again.");
             }
 
-            for(int i = 0; i <= numChoices; i++) {
-                if(choice == i) {
-                    validChoice = true;
-                }
+            if (choice >= 1 && choice <= numChoices) {
+                validChoice = true;
+            } else if (choice == 0) {
+                std::cout << "Thank you for using the Sudoku Solver!" << std::endl;
+                exit(0);
+            } else {
+                throw std::runtime_error("Invalid choice. Please try again.");
             }
         }
-        catch(std::exception ex) {
-            validChoice = false;
-        }
-
-        if(validChoice) {
-            std::cout << std::endl;
-            return choice;
-        }
-        else {
-            std::cout << "Invalid choice. Please try again: ";
-        }
+        catch (const std::exception &e)
+        {
+            std::cout << "Error " << e.what() << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }    
     }
+
+    return choice;
 }
 
 
