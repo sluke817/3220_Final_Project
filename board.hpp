@@ -21,7 +21,7 @@ class SudokuBoard {
         // void printBoard();
         bool safeMove(int row, int col, int value);
         bool backtrackingSolve(int row, int col);
-        void solveBoard();
+        int solveBoard();
         std::string toString();
 };
 

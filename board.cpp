@@ -10,16 +10,6 @@ SudokuBoard::SudokuBoard(int setup[N * N]) {
     }
 }
 
-// prints the board to std::cout
-// void SudokuBoard::printBoard() {
-//     for(int i = 0; i < N; i++) {
-//         for(int j = 0; j < N; j++) {
-//             std::cout << board[i * N + j] << " ";
-//         }
-//         std::cout << std::endl;
-//     }
-// }
-
 int SudokuBoard::getVal(int row, int col) {
     return board[row * N + col];
 }
@@ -111,7 +101,7 @@ bool SudokuBoard::backtrackingSolve(int row, int col) {
             if (backtrackingSolve(row, col + 1)) {
                 return true;
             }       
-                
+    
         }
         // Removes the guessed value since our assumption was wrong
         board[row * N + col] = 0;
@@ -120,11 +110,13 @@ bool SudokuBoard::backtrackingSolve(int row, int col) {
     
 }
 
-void SudokuBoard::solveBoard() {
+//return 1 for successful
+//return 0 for unsuccessful
+int SudokuBoard::solveBoard() {
     if(backtrackingSolve(0,0)) {
-        std::cout << "Solved board! " << std::endl;
+        return 1;
     }
     else {
-        std::cout << "No solution found. Board is unsolvable." << std::endl;
+        return 0;
     }
 }
