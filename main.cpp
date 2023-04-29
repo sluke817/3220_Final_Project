@@ -6,27 +6,60 @@
 
 
 int main(){
+        std::cout << "Welcome to the Sudoku Solver" << std::endl;
 
-    // int initialValidLayout[9][9] =
-    //         {{0,0,1,0,0,2,0,0,0},
-    //         {0,0,5,0,0,6,0,3,0},
-    //         {4,6,0,0,0,5,0,0,0},
-    //         {0,0,0,1,0,4,0,0,0},
-    //         {6,0,0,8,0,0,1,4,3},
-    //         {0,0,0,0,9,0,5,0,8},
-    //         {8,0,0,0,4,9,0,5,0},
-    //         {1,0,0,3,2,0,0,0,0},
-    //         {0,0,9,0,0,0,3,0,0}};
+    while(true){
 
-    // SudokuBoard board1 = SudokuBoard(initialValidLayout);
 
-    // board1.solveBoard();
+        std::string mainMenuMsg =  
+                        "Please choose what you would like to do:\n"
+                        "1. Input a Sudoku board through the command line.\n"
+                        "2. Input a Sudoku board from a file.\n"
+                        "3. Generate a random Sudoku board.\n"
+                        "Enter 1-3, or 0 for done to exit.\n"; 
+        
+        int userChoice = UserHandler::getHandler()->getMenuChoice(3, mainMenuMsg);
 
-    
+        if(userChoice == 1){
+
+            try{
+            std::cout << "To enter your puzzle, enter it row by row. Enter a 0 for values that are empty" << std::endl;
+            std::cout << "An example entry looks like this : 1 2 3 4 5 6 7 8 9" << std::endl;
+
+            UserHandler::getHandler()->setInput(std::cin);
+            SudokuBoard sb = UserHandler::getHandler()->inputBoard();
+            UserHandler::getHandler()->successfulBoardCreation(sb);
+            }catch (const std::exception &e){
+                std::cout << e.what() << std::endl;
+            } 
+
+        }else if(userChoice == 2){
+            std::string fileName = UserHandler::getHandler()->getFileName();
+
+            try{
+            std::ifstream boardInFile;
+                boardInFile.open(fileName);
+                if(!boardInFile){
+                    //not incorporated in the loop. So user wont be able to try again for this specific input. WIll be taken back to the main menu. Is this okay?
+                    throw std::runtime_error("File does not exist.");
+                }
+                UserHandler::getHandler()->setInput(boardInFile);
+                SudokuBoard sb = UserHandler::getHandler()->inputBoard();
+                UserHandler::getHandler()->successfulBoardCreation(sb);
+            }catch (const std::exception &e){
+                std::cout << e.what() << std::endl;
+            } 
+
+        }else if(userChoice == 3){
+            
+        }
+
+    }
+
     // input decision
-    std::ifstream boardInFile;
-    boardInFile.open("board1.txt");
-    UserHandler::getHandler()->setInput(boardInFile);
+    // std::ifstream boardInFile;
+    // boardInFile.open("board1.txt");
+    // UserHandler::getHandler()->setInput(std::cin);
     // or...
     //std::cout << "Enter the board row by row, making sure to put a space between each number" << std::endl;
 
@@ -39,9 +72,8 @@ int main(){
     // do nothing -> the default output is the screen
 
 
-
-    
     try {
+        std::cout << "please enter a board\n";
         SudokuBoard sb = UserHandler::getHandler()->inputBoard();
         sb.solveBoard();
         UserHandler::getHandler()->outputBoard(sb);
