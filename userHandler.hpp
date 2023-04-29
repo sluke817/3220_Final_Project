@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <filesystem>
 #include "boardFactory.hpp"
 #include "board.hpp"
 
@@ -23,8 +24,10 @@ class UserHandler {
         // Singleton Design Pattern
         static UserHandler* getHandler();
 
-
+        //Based of user choices MIGHT WANT TO MOVE THESE FUNCTIONS
         int getMenuChoice(int, std::string);
+        std::string getFileName();
+        void successfulBoardCreation(SudokuBoard&);
 
         // Strategy Design Pattern
         void setInput(std::istream&);
