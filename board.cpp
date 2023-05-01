@@ -1,25 +1,25 @@
 #include "board.hpp"
 
-// initial setup: 1D array of numbers representing a sudoku board ([row * N + col] = [row][col])
-SudokuBoard::SudokuBoard(int setup[N * N]) {
-    board = std::make_unique<int[]>(N * N);
-    for(int row = 0; row < N; row++) {
-        for(int col = 0; col < N; col++) {
-            board[row * N + col] = setup[row * N + col];
+// initial setup: 1D array of numbers representing a sudoku board ([row * SIZE + col] = [row][col])
+SudokuBoard::SudokuBoard(int setup[SIZE * SIZE]) {
+    board = std::make_unique<int[]>(SIZE * SIZE);
+    for(int row = 0; row < SIZE; row++) {
+        for(int col = 0; col < SIZE; col++) {
+            board[row * SIZE + col] = setup[row * SIZE + col];
         }
     }
 }
 
 int SudokuBoard::getVal(int row, int col) {
-    return board[row * N + col];
+    return board[row * SIZE + col];
 }
 
 // returns the board in string format
 std::string SudokuBoard::toString() {
     std::stringstream ss;
-    for(int i = 0; i < N; i++) {
-        for(int j = 0; j < N; j++) {
-            ss << board[i * N + j] << " ";
+    for(int i = 0; i < SIZE; i++) {
+        for(int j = 0; j < SIZE; j++) {
+            ss << board[i * SIZE + j] << " ";
         }
         ss << "\n";
     }
@@ -28,22 +28,22 @@ std::string SudokuBoard::toString() {
 
 // determines if a certain move is "safe"
 bool SudokuBoard::safeMove(int row, int col, int value) {
-    if(value < 1 || value > N) {
+    if(value < 1 || value > SIZE) {
         throw "Invalid value.";
     }
-    if(row < 0 || row > N || col < 0 || col > N) {
+    if(row < 0 || row > SIZE || col < 0 || col > SIZE) {
         throw "Invalid coordinantes.";
     }
 
     // checks if number is already in the row
-    for (int i = 0; i < N; i++) {
-        if (board[row * N + i] == value) {
+    for (int i = 0; i < SIZE; i++) {
+        if (board[row * SIZE + i] == value) {
             return false;
         }      
     }
     // checks if the number is already in the column
-    for (int i = 0; i < N; i++) {
-        if (board[i * N + col] == value) {
+    for (int i = 0; i < SIZE; i++) {
+        if (board[i * SIZE + col] == value) {
             return false;
         }  
             
@@ -55,7 +55,7 @@ bool SudokuBoard::safeMove(int row, int col, int value) {
 
     for(int i = 0; i < 3; i++) {
         for(int j = 0; j < 3; j++) {
-            if (board[(i + startRow) * N + j + startCol] == value) {
+            if (board[(i + startRow) * SIZE + j + startCol] == value) {
                 return false;
             }
         }
@@ -69,20 +69,20 @@ bool SudokuBoard::safeMove(int row, int col, int value) {
 bool SudokuBoard::backtrackingSolve(int row, int col) {
 
     // we have reached the very end with no errors, so it is solved!
-    if (row == 8 && col == N)
+    if (row == 8 && col == SIZE)
         return true;
 
     // if we are on the last column, we move to the next row
-    if (col == N) {
+    if (col == SIZE) {
         row++;
         col = 0;
     }
 
     // if there is already a number here, move to the next space
-    if (board[row * N + col] > 0)
+    if (board[row * SIZE + col] > 0)
         return backtrackingSolve(row, col + 1);
 
-    for (int value = 1; value <= N; value++) 
+    for (int value = 1; value <= SIZE; value++) 
     {
         // Check if it is safe to place the num (1-9) in the given row and col
         // we then move to next column
@@ -95,7 +95,7 @@ bool SudokuBoard::backtrackingSolve(int row, int col) {
               and assuming our assigned 
               num in the position
               is correct (for now)    */
-            board[row * N + col] = value;
+            board[row * SIZE + col] = value;
             
             //  Checking the next possibility with next column
             if (backtrackingSolve(row, col + 1)) {
@@ -104,7 +104,7 @@ bool SudokuBoard::backtrackingSolve(int row, int col) {
     
         }
         // Removes the guessed value since our assumption was wrong
-        board[row * N + col] = 0;
+        board[row * SIZE + col] = 0;
     }
     return false;
     

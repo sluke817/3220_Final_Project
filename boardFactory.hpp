@@ -18,7 +18,7 @@ class BoardFactory {
     public:
 
         // returns a Sudoku board from an array
-        static SudokuBoard createBoard(int arr[N * N]);
+        static SudokuBoard createBoard(int arr[SIZE * SIZE]);
 
 
         // returns a randomly generated board of different difficulty (*** UNFINISHED ***);

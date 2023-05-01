@@ -48,11 +48,11 @@ void UserHandler::setInput(std::istream& newIn) {
 
 // returns a created sudoku board from the UserHandler's input
 SudokuBoard UserHandler::inputBoard() {
-    int row[N];
-    int board[N * N];
+    int row[SIZE];
+    int board[SIZE * SIZE];
 
     try {
-        for(int i = 0; i < N; i++){
+        for(int i = 0; i < SIZE; i++){
 
             *inputStream >> row;
 
@@ -60,11 +60,11 @@ SudokuBoard UserHandler::inputBoard() {
                 throw "Error: Invalid input format.";
             }
 
-            for(int j = 0; j < N; j++){
+            for(int j = 0; j < SIZE; j++){
                 if(row[j] > 9 || row[j] < 0) {
                     throw "Error: Invalid values in board.";
                 }
-                board[i * N + j] = row[j];
+                board[i * SIZE + j] = row[j];
             }
         }
     }
@@ -163,22 +163,22 @@ void UserHandler::successfulBoardCreation(SudokuBoard& sb){
         if(choice == 1){
             std::cout << sb.toString();
         }else if(choice == 2){
-            std::string fileName = UserHandler::getHandler()->getFileName();
+            std::string fileSIZEame = UserHandler::getHandler()->getFileName();
             std::ofstream boardOutFile;
-            boardOutFile.open(fileName);
+            boardOutFile.open(fileSIZEame);
             UserHandler::getHandler()->setOutput(boardOutFile);
             UserHandler::getHandler()->outputBoard(sb);
-            std::cout << "Your file has been saved to " << fileName << std::endl;
+            std::cout << "Your file has been saved to " << fileSIZEame << std::endl;
             
         }else if(choice == 3){
             std::cout << sb.toString();
 
-            std::string fileName = UserHandler::getHandler()->getFileName();
+            std::string fileSIZEame = UserHandler::getHandler()->getFileName();
             std::ofstream boardOutFile;
-            boardOutFile.open(fileName);
+            boardOutFile.open(fileSIZEame);
             UserHandler::getHandler()->setOutput(boardOutFile);
             UserHandler::getHandler()->outputBoard(sb);
-            std::cout << "Your puzzle has been saved to " << fileName << std::endl;
+            std::cout << "Your puzzle has been saved to " << fileSIZEame << std::endl;
         }else if(choice == 4){
             //do nothing
         }

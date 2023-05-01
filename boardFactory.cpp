@@ -2,7 +2,7 @@
 
 // need to build out still (*** UNFINISHED ***)
 SudokuBoard BoardFactory::createBoard(boardDifficulty difficulty) {
-    int initialValidLayout[N * N] = {3, 1, 6, 5, 7, 8, 4, 9, 2, 
+    int initialValidLayout[SIZE * SIZE] = {3, 1, 6, 5, 7, 8, 4, 9, 2, 
                                     5, 2, 9, 1, 3, 4, 7, 6, 8, 
                                     4, 8, 7, 6, 2, 9, 5, 3, 1, 
                                     2, 6, 3, 4, 1, 5, 9, 8, 7, 
@@ -16,13 +16,13 @@ SudokuBoard BoardFactory::createBoard(boardDifficulty difficulty) {
         int randomRow = rand() % 10;
         int randomCol = rand() % 10;
 
-        initialValidLayout[randomRow * N + randomCol] = 0;
+        initialValidLayout[randomRow * SIZE + randomCol] = 0;
     }
 
     return SudokuBoard(initialValidLayout);
 }
 
-SudokuBoard BoardFactory::createBoard(int arr[N * N]) {
+SudokuBoard BoardFactory::createBoard(int arr[SIZE * SIZE]) {
     return SudokuBoard(arr);
 }
 
