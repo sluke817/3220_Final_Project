@@ -1,4 +1,5 @@
-CXXFLAGS := -std=c++14 -Wall -Werror -ggdb -O0
+CXX := g++
+CXXFLAGS := -std=c++17 -Wall -Werror -ggdb -O0
 DANGEROUSFLAGS := -O3
 
 ALL_SOURCES := $(wildcard *.cpp)
@@ -12,8 +13,8 @@ TESTS_OBJ := $(TESTS_SOURCES:%.cpp=%.o)
 LDFLAGS := -L/usr/local/lib
 LDLIBS := -lgtest -lgtest_main
 
-TARGET := finalProject.out
-TESTS := runTests.out
+TARGET := finalProject
+TESTS := runTests
 
 .PHONY : all clean run test
 all : $(TARGET) $(TESTS)

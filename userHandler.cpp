@@ -26,7 +26,7 @@ void UserHandler::outputBoard(SudokuBoard& board) {
     try {
         *outputStream << board.toString();
     }
-    catch(std::exception) {
+    catch(std::exception&) {
         std::cout << "Error when attempting to output board." << std::endl;
     }
 }
@@ -68,7 +68,7 @@ SudokuBoard UserHandler::inputBoard() {
             }
         }
     }
-    catch(std::exception) {
+    catch(std::exception&) {
         throw "Error when reading input. Please make sure format is correct.";
     }
 
@@ -124,14 +124,21 @@ std::string UserHandler::getFileName(){
             std::cout << ">> ";
             std::cin >> filepath_;
 
-            std::__fs::filesystem::path filePath(filepath_);
+            // std::__fs::filesystem::path filePath(filepath_);
+            int dotIndex = filepath_.rfind(".");
 
-            if (filePath.extension() != ".txt") {
+            if (dotIndex == (int)std::string::npos)
+            {
+                throw std::runtime_error("Invalid file name format. Please try again");
+            }
+            else if(filepath_.substr(dotIndex + 1) != "txt")
+            {
                 throw std::runtime_error("File name does not end in .txt. Please try again");
             }
 
             return filepath_;
-        }catch (const std::exception &e){
+        }
+        catch (const std::exception &e){
             std::cout << "Error " << e.what() << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

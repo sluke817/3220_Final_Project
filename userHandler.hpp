@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <filesystem>
+#include <limits>
 #include "boardFactory.hpp"
 #include "board.hpp"
 
