@@ -51,7 +51,9 @@ int main(){
             } 
 
         }else if(userChoice == 3){
-            
+            //UserHandler::getHandler()->setInput(std::cin);
+            SudokuBoard sb = BoardFactory::createBoard(boardDifficulty::easy);
+            UserHandler::getHandler()->successfulBoardCreation(sb);
         }
 
     }

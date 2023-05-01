@@ -23,6 +23,8 @@ class BoardFactory {
 
         // returns a randomly generated board of different difficulty (*** UNFINISHED ***);
         static SudokuBoard createBoard(boardDifficulty difficulty);
+        static void rowSwap(int arr[SIZE * SIZE], int r1, int r2);
+        static void colSwap(int arr[SIZE * SIZE], int c1, int c2);
 
         // Ported over to UserHandler to follow the design patterns
         // returns a board from either a file or from user input (strategy design pattern)
