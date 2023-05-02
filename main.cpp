@@ -53,6 +53,8 @@ int main(){
         }else if(userChoice == 3){
             //UserHandler::getHandler()->setInput(std::cin);
             SudokuBoard sb = BoardFactory::createBoard(boardDifficulty::easy);
+            std::cout << "Here is your randomly created board:" << std::endl;
+            std::cout << sb.toString() << std::endl;
             UserHandler::getHandler()->successfulBoardCreation(sb);
         }
 

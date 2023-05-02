@@ -81,6 +81,11 @@ SudokuBoard BoardFactory::createBoard(boardDifficulty difficulty) {
         
     }
 
+    for(int i = 0; i < 41; i++){
+        int randSeed = rand() % 81;
+        initialValidLayout[randSeed] = 0;
+    }
+
     return SudokuBoard(initialValidLayout);
 }
 
