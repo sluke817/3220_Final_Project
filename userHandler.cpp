@@ -86,7 +86,7 @@ int UserHandler::getMenuChoice(int numChoices, std::string msg) {
         try{
             std::cout << ">> ";
             std::cin >> choice;
-
+        
             if (std::cin.fail()) {
                 throw std::runtime_error("Invalid input. Please try again.");
             }
@@ -105,9 +105,9 @@ int UserHandler::getMenuChoice(int numChoices, std::string msg) {
             std::cout << "Error " << e.what() << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            
         }    
     }
-
     return choice;
 }
 
@@ -120,7 +120,6 @@ std::string UserHandler::getFileName(){
         try{
             std::cout << ">> ";
             std::cin >> filepath_;
-
             int dotIndex = filepath_.rfind(".");
 
             if (dotIndex == (int)std::string::npos)
@@ -139,38 +138,39 @@ std::string UserHandler::getFileName(){
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
     }
-
     return filepath_;
 }
 
 //A menu for the user after a board has been created/solved
 void UserHandler::successfulBoardCreation(SudokuBoard& sb){
 
-        std::string menuMsg = 
-                                "Please choose what you would like to do \n"
-                                "1. Print to the commandline \n"
-                                "2. Save to file \n"
-                                "3. Print and save to file \n"
-                                "4. Return to main menu \n"
-                                "Please enter 1-4 \n";
+    std::string menuMsg = 
+                            "Please choose what you would like to do \n"
+                            "1. Print to the commandline \n"
+                            "2. Save to file \n"
+                            "3. Print and save to file \n"
+                            "4. Return to main menu \n"
+                            "Please enter 1-4 \n";
 
-        int choice = UserHandler::getHandler()->getMenuChoice(4, menuMsg);
-        if(choice == 1){
-            std::cout << sb.toString();
-        }else if(choice == 2){
-            saveBoardToFile(sb);
-        }else if(choice == 3){
-            std::cout << sb.toString();
-            saveBoardToFile(sb);
-        }
+    int choice = getMenuChoice(4, menuMsg);
+    if(choice == 1){
+        std::cout << sb.toString();
+    }else if(choice == 2){
+        saveBoardToFile(sb);
+    }else if(choice == 3){
+        std::cout << sb.toString();
+        saveBoardToFile(sb);
+    }
+    std::cout << "\n";
 }
 
 //saves a created board to a file
 void UserHandler::saveBoardToFile(SudokuBoard& sb){
-    std::string fileName = UserHandler::getHandler()->getFileName();
+    std::string fileName = getFileName();
     std::ofstream boardOutFile;
     boardOutFile.open(fileName);
-    UserHandler::getHandler()->setOutput(boardOutFile);
-    UserHandler::getHandler()->outputBoard(sb);
+    setOutput(boardOutFile);
+    outputBoard(sb);
     std::cout << "Your file has been saved to " << fileName << std::endl;
+    std::cout << "\n";
 }

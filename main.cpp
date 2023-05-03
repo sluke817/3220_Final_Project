@@ -38,7 +38,7 @@ int main(){
 
         }else if(userChoice == 2){
             std::string fileName = UserHandler::getHandler()->getFileName();
-
+            std::cout << "\n";
             try{
                 std::ifstream boardInFile;
                 boardInFile.open(fileName);
@@ -49,7 +49,7 @@ int main(){
                 SudokuBoard sb = UserHandler::getHandler()->inputBoard();
 
                 if(sb.solveBoard()){
-                    std::cout << "Your puzzle has been solved" << std::endl;
+                    std::cout << "Your puzzle has been solved\n" << std::endl;
                     UserHandler::getHandler()->successfulBoardCreation(sb);
                 }else{
                     std::cout << "Your board was not solvable\n" << std::endl;
@@ -72,7 +72,7 @@ int main(){
             else if(userChoice == 3) difficulty = hard;
 
             SudokuBoard sb = BoardFactory::createBoard(difficulty);
-            std::cout << "Your board has been created" << std::endl;
+            std::cout << "Your board has been created!\n" << std::endl;
             UserHandler::getHandler()->successfulBoardCreation(sb);
         }
     }

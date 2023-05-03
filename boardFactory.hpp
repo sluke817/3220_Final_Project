@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstddef>
 #include <fstream>
+#include <ctime>
 
 
 enum boardDifficulty {
