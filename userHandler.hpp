@@ -25,10 +25,11 @@ class UserHandler {
         // Singleton Design Pattern
         static UserHandler* getHandler();
 
-        //Based of user choices MIGHT WANT TO MOVE THESE FUNCTIONS
+        //Based of user choices 
         int getMenuChoice(int, std::string);
         std::string getFileName();
         void successfulBoardCreation(SudokuBoard&);
+        void saveBoardToFile(SudokuBoard&);
 
         // Strategy Design Pattern
         void setInput(std::istream&);

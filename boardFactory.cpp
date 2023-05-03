@@ -14,16 +14,6 @@ SudokuBoard BoardFactory::createBoard(boardDifficulty difficulty) {
                                     6, 9, 2, 3, 5, 1, 8, 7, 4, 
                                     7, 4, 5, 2, 8, 6, 3, 1, 9};
 
-
-
-    /*
-    for(int i = 0; i < (int)difficulty; i++) {
-        int randomRow = rand() % 10;
-        int randomCol = rand() % 10;
-
-        initialValidLayout[randomRow * SIZE + randomCol] = 0;
-    }
-    */
    //column random swaps
     for(int i = 0; i < 9; i += 3){
         int randSeed = rand() % 6 + 1;
@@ -87,11 +77,6 @@ SudokuBoard BoardFactory::createBoard(boardDifficulty difficulty) {
             randSeed = (randSeed + 1) % 81;
         }
 
-        /*
-        if(initialValidLayout[randSeed] == 0){
-            initialValidLayout[(randSeed +7 % 81)] = 0;
-        }
-        */
         initialValidLayout[randSeed] = 0;
     }
 
@@ -124,58 +109,3 @@ void BoardFactory::colSwap(int arr[SIZE * SIZE], int c1, int c2){
         arr[c2 + SIZE*i] = c1arr[i];
     }
 }
-
-
-
-// template <typename T, size_t K>
-// std::istream& operator>>(std::istream& is, T(&board)[K])
-// {
-//     for (size_t i = 0; i < K; ++i) {
-//         is >> board[i];
-//     }
-//     return is;
-// }
-
-// SudokuBoard BoardFactory::solveBoardFromInput(){
-
-//     std::cout << "You will enter the puzzle row by row. Enter a 0 for values that are empty" << std::endl;
-//     std::cout << "An example entry looks like this : 1 2 3 4 5 6 7 8 9" << std::endl;
-
-//     int row[N];
-//     int board[N][N];
-
-//     for(int i = 0; i < N; i++){
-//         std::cout << "Please enter the " << i + 1 << " row" << std::endl;
-//         std::cin >> row;
-//         for(int j = 0; j < N; j++){
-//             board[i][j] = row[j];
-//         }
-//     }
-
-//     SudokuBoard sb = SudokuBoard(board);
-//     sb.solveBoard();
-
-//     return sb;
-// }
-
-// SudokuBoard BoardFactory::solveBoardFromFile(std::string fileName){
-//     int board[9][9];
-//     std::ifstream infile(fileName);
-
-//     if (!infile) {
-//         std::cerr << "Unable to open file";
-//         exit(1);
-//     }
-
-//     for (int i = 0; i < 9; ++i) {
-//         for (int j = 0; j < 9; ++j) {
-//             infile >> board[i][j];
-//         }
-//     }
-//     SudokuBoard sb = SudokuBoard(board);
-//     sb.solveBoard();
-
-//     return sb;
-// }
-
-

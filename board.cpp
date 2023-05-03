@@ -101,7 +101,6 @@ bool SudokuBoard::backtrackingSolve(int row, int col) {
             if (backtrackingSolve(row, col + 1)) {
                 return true;
             }       
-    
         }
         // Removes the guessed value since our assumption was wrong
         board[row * SIZE + col] = 0;

@@ -15,7 +15,6 @@ UserHandler* UserHandler::getHandler() {
     return instance;
 }
 
-
 // sets the output
 void UserHandler::setOutput(std::ostream& newOut) {
     outputStream = &newOut;
@@ -38,6 +37,7 @@ std::istream& operator>>(std::istream& is, T(&board)[K])
     for (size_t i = 0; i < K; ++i) {
         is >> board[i];
     }
+
     return is;
 }
 
@@ -75,10 +75,6 @@ SudokuBoard UserHandler::inputBoard() {
     return BoardFactory::createBoard(board);
 }
 
-
-
-// Might want to put these in a new folder called hellper functions or UserInput etc
-
 // returns a choice from a menu selection. Does not let the user leave until entering a valid choice (helps with user menu creation)
 int UserHandler::getMenuChoice(int numChoices, std::string msg) {
 
@@ -115,6 +111,7 @@ int UserHandler::getMenuChoice(int numChoices, std::string msg) {
     return choice;
 }
 
+// get filename from the user. User must return a file that ends in .txt
 std::string UserHandler::getFileName(){
     std::cout << "Enter file name (must be .txt file) : " << std::endl;
     std::string filepath_ = "";
@@ -124,7 +121,6 @@ std::string UserHandler::getFileName(){
             std::cout << ">> ";
             std::cin >> filepath_;
 
-            // std::__fs::filesystem::path filePath(filepath_);
             int dotIndex = filepath_.rfind(".");
 
             if (dotIndex == (int)std::string::npos)
@@ -135,7 +131,6 @@ std::string UserHandler::getFileName(){
             {
                 throw std::runtime_error("File name does not end in .txt. Please try again");
             }
-
             return filepath_;
         }
         catch (const std::exception &e){
@@ -148,10 +143,10 @@ std::string UserHandler::getFileName(){
     return filepath_;
 }
 
+//A menu for the user after a board has been created/solved
 void UserHandler::successfulBoardCreation(SudokuBoard& sb){
 
-    if(sb.solveBoard()){
-        std::string menuMsg = "Your puzzle has been solved. \n"
+        std::string menuMsg = 
                                 "Please choose what you would like to do \n"
                                 "1. Print to the commandline \n"
                                 "2. Save to file \n"
@@ -163,29 +158,19 @@ void UserHandler::successfulBoardCreation(SudokuBoard& sb){
         if(choice == 1){
             std::cout << sb.toString();
         }else if(choice == 2){
-            std::string fileSIZEame = UserHandler::getHandler()->getFileName();
-            std::ofstream boardOutFile;
-            boardOutFile.open(fileSIZEame);
-            UserHandler::getHandler()->setOutput(boardOutFile);
-            UserHandler::getHandler()->outputBoard(sb);
-            std::cout << "Your file has been saved to " << fileSIZEame << std::endl;
-            
+            saveBoardToFile(sb);
         }else if(choice == 3){
             std::cout << sb.toString();
-
-            std::string fileSIZEame = UserHandler::getHandler()->getFileName();
-            std::ofstream boardOutFile;
-            boardOutFile.open(fileSIZEame);
-            UserHandler::getHandler()->setOutput(boardOutFile);
-            UserHandler::getHandler()->outputBoard(sb);
-            std::cout << "Your puzzle has been saved to " << fileSIZEame << std::endl;
-        }else if(choice == 4){
-            //do nothing
+            saveBoardToFile(sb);
         }
-    }else{
-        std::cout << "Your board was not solvable\n" << std::endl;
-    }
 }
 
-
-
+//saves a created board to a file
+void UserHandler::saveBoardToFile(SudokuBoard& sb){
+    std::string fileName = UserHandler::getHandler()->getFileName();
+    std::ofstream boardOutFile;
+    boardOutFile.open(fileName);
+    UserHandler::getHandler()->setOutput(boardOutFile);
+    UserHandler::getHandler()->outputBoard(sb);
+    std::cout << "Your file has been saved to " << fileName << std::endl;
+}
