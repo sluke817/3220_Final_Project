@@ -9,9 +9,9 @@
 
 
 enum boardDifficulty {
-    easy = 10,
-    medum = 7,
-    hard = 5
+    easy = 38,
+    medium = 33,
+    hard = 28
 };
 
 class BoardFactory {

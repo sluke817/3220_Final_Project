@@ -52,7 +52,18 @@ int main(){
 
         }else if(userChoice == 3){
             //UserHandler::getHandler()->setInput(std::cin);
-            SudokuBoard sb = BoardFactory::createBoard(boardDifficulty::easy);
+            std::string difficultyMsg =  
+                        "Please choose the difficulty of your random board:\n"
+                        "1. Easy (approx. 38 clues)\n"
+                        "2. Medium (approx. 33 clues)\n"
+                        "3. Hard (approx. 28 clues)\n"
+                        "Enter 1-3, or 0 to exit program.\n"; 
+            int userChoice = UserHandler::getHandler()->getMenuChoice(3, difficultyMsg);
+            boardDifficulty difficulty = medium;
+            if(userChoice == 1) difficulty = easy;
+            else if(userChoice == 3) difficulty = hard;
+
+            SudokuBoard sb = BoardFactory::createBoard(difficulty);
             std::cout << "Here is your randomly created board:" << std::endl;
             std::cout << sb.toString() << std::endl;
             UserHandler::getHandler()->successfulBoardCreation(sb);
