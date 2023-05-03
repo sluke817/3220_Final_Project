@@ -11,7 +11,11 @@ SudokuBoard::SudokuBoard(int setup[SIZE * SIZE]) {
 }
 
 int SudokuBoard::getVal(int row, int col) {
-    return board[row * SIZE + col];
+    if(row < SIZE && row >= 0 && col < SIZE && col >= 0){
+        return board[row * SIZE + col];
+    }else{
+        return -1;
+    }
 }
 
 // returns the board in string format
